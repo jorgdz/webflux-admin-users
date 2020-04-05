@@ -1,6 +1,5 @@
 package com.github.com.jorgdz.app.services;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,10 +23,11 @@ public class CountryServiceImpl implements CountryService{
 	
 	@Override
 	public Flux<Country> getAll() {
-		List<Country> listCountries = Arrays.asList(restTemplate.getForObject(restCountry, Country[].class));
+		List<Country> listCountries = Arrays.asList(this.restTemplate.getForObject(this.restCountry, Country[].class));
+		
 		Flux<Country> countries = Flux.fromIterable(listCountries);
-		return countries.map(c -> new Country(c.getName()))
-				.delaySequence(Duration.ofSeconds(1));
+		return countries.map(c -> new Country(c.getName(), c.getTranslations()));
+				//.delayElements(Duration.ofSeconds(1));
 	}
 
 }

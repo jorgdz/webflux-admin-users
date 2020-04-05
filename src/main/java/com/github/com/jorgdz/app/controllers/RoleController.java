@@ -1,6 +1,5 @@
 package com.github.com.jorgdz.app.controllers;
 
-import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +26,17 @@ public class RoleController extends ApiController {
 	@Autowired
 	private RoleService serviceRole;
 		
-	@GetMapping(produces = AppHelper.FORMAT_RESPONSE)
-	Publisher <ResponseEntity<Role>> index ()
+	@GetMapping
+	public Flux <Role> index ()
 	{
-		Flux<Role> roles = serviceRole.findAll()
+		Flux<Role> roles = serviceRole.findAllDataDriver()
 			.doOnNext(rol -> log.info(rol.getName()));
 	
-		return roles.map(r -> ResponseEntity.ok(r));
+		return roles;
 	}
 	
 	@GetMapping(value = "/{id}", produces = AppHelper.FORMAT_RESPONSE)
-	Publisher <ResponseEntity<Role>> show(@PathVariable String id)
+	public Mono <ResponseEntity<Role>> show(@PathVariable String id)
 	{
 		Flux<Role> roles = serviceRole.findAll();
 		

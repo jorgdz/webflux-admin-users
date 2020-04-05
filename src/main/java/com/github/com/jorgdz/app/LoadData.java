@@ -63,6 +63,7 @@ public class LoadData implements ApplicationListener<ContextRefreshedEvent>{
 			})
 			.thenMany(roles -> {
 				List<Role> listRoles = roleRepo.findByName("admin").collectList().block();
+				
 				Flux.just(new User("Jorge", "Diaz", LocalDate.parse("1994-10-31"), Gender.MASCULINO, "jdzm@outlook.es", "$2a$10$HlFUDBXs9EkVq8yXiQ5nYeHr.Nc0Ej4ATzdXx9n7kVAmqY5TyxK2q", true, new Country("Ecuador"), listRoles),
 						new User("Josue", "Caballero Macías", LocalDate.parse("1994-03-10"), Gender.MASCULINO, "elsorbo@gmail.com", "$2a$10$HlFUDBXs9EkVq8yXiQ5nYeHr.Nc0Ej4ATzdXx9n7kVAmqY5TyxK2q", true, new Country("Ecuador")))
 				.flatMap(userRepo::save)

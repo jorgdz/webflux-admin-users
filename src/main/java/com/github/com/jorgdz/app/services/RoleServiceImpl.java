@@ -35,7 +35,7 @@ public class RoleServiceImpl implements RoleService{
 				role.setDescription(role.getDescription().toUpperCase());
 				return role;
 			})
-			.delaySequence(Duration.ofSeconds(1));
+			.delayElements(Duration.ofSeconds(1));
 	}
 
 	@Override

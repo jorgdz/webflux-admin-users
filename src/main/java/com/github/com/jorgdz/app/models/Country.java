@@ -4,25 +4,22 @@ import java.io.Serializable;
 
 public class Country implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8299734984435435863L;
 	
 	private String name;
+	private Translation translations;
+	
+	public Country() {}
 	
 	public Country(String name) {
 		this.name = name;
 	}
 	
-	public Country(Country country) {
-		this.name = country.getName();
+	public Country(String name, Translation translations) {
+		this.name = name;
+		this.translations = translations;
 	}
 	
-	public Country() {
-		super();
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -31,9 +28,17 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 
+	public Translation getTranslations() {
+		return translations;
+	}
+
+	public void setTranslations(Translation translations) {
+		this.translations = translations;
+	}
+
 	@Override
 	public String toString() {
-		return "Country [name=" + name + "]";
+		return "Country [name=" + name + ", translations=" + translations + "]";
 	}
 	
 }

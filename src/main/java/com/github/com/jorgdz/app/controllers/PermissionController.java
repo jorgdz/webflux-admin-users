@@ -26,11 +26,10 @@ public class PermissionController extends ApiController {
 	@Autowired
 	private PermissionService servicePermission;
 	
-	@GetMapping(produces = AppHelper.FORMAT_RESPONSE)
-	public Flux<ResponseEntity<Permission>> index ()
+	@GetMapping
+	public Flux<Permission> index ()
 	{		
-		return servicePermission.findAll()
-				.map(permission -> new ResponseEntity<>(permission, HttpStatus.OK));
+		return servicePermission.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = AppHelper.FORMAT_RESPONSE)

@@ -1,6 +1,5 @@
 package com.github.com.jorgdz.app.controllers;
 
-import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,7 @@ import com.github.com.jorgdz.app.exceptions.NotFoundException;
 import com.github.com.jorgdz.app.services.UserService;
 import com.github.com.jorgdz.app.util.AppHelper;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -26,15 +26,14 @@ public class UserController extends ApiController{
 	@Autowired
 	private UserService serviceUser;
 	
-	@GetMapping(produces = AppHelper.FORMAT_RESPONSE)
-	Publisher<ResponseEntity<User>> index ()
+	@GetMapping
+	public Flux<User> index ()
 	{
-		return this.serviceUser.findAll()
-				.map(user -> ResponseEntity.ok(user));
+		return this.serviceUser.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = AppHelper.FORMAT_RESPONSE)
-	Publisher<ResponseEntity<User>> show (@PathVariable String id)
+	public Mono<ResponseEntity<User>> show (@PathVariable String id)
 	{
 		Mono<User> user = this.serviceUser.findById(id);
 		if(user == null)
