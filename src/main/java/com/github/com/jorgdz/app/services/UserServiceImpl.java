@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Mono<User> findById(String id) {
 		Mono<User> user = this.userRepo.findById(id);
-		return (user.blockOptional().isPresent()) ? user : null;
+		return user;
 	}
 
 }

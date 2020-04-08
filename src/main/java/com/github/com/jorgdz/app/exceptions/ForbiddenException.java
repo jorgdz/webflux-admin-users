@@ -1,14 +1,26 @@
 package com.github.com.jorgdz.app.exceptions;
 
-public class ForbiddenException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+public class ForbiddenException extends ResponseStatusException {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3738009364322486603L;
 
-	public ForbiddenException(String context) 
+	public ForbiddenException(String message) 
 	{
-		super(context);
+		super(HttpStatus.FORBIDDEN, message);
+	}
+	
+	public ForbiddenException(HttpStatus status) {
+		super(status);
+	}
+	
+	public ForbiddenException(String message, HttpStatus status) {
+		super(status, message);
+	}
+	
+	public ForbiddenException(String msg, HttpStatus status, Throwable cause) {
+		super(status, msg, cause);
 	}
 }

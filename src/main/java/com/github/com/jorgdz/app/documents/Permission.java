@@ -1,5 +1,7 @@
 package com.github.com.jorgdz.app.documents;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +15,8 @@ public class Permission {
 	@Id
 	private String id;
 	
+	@NotEmpty(message = "El campo nombre es obligatorio.")
+	//@Indexed(unique=true)
 	private String name;
 	
 	private String description;

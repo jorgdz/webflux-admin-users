@@ -1,12 +1,17 @@
 package com.github.com.jorgdz.app.services;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.github.com.jorgdz.app.models.Country;
 
@@ -15,19 +20,35 @@ import reactor.core.publisher.Flux;
 @Service
 public class CountryServiceImpl implements CountryService{
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+	private final Logger log = LoggerFactory.getLogger(CountryServiceImpl.class);
+		
 	@Value("${rest.country}")
 	private String restCountry;
 	
 	@Override
 	public Flux<Country> getAll() {
-		List<Country> listCountries = Arrays.asList(this.restTemplate.getForObject(this.restCountry, Country[].class));
+		Instant start = Instant.now();
 		
-		Flux<Country> countries = Flux.fromIterable(listCountries);
+		WebClient client = WebClient.create(this.restCountry);
+		
+		//RestTemplate restTemplate = new RestTemplate();
+				
+		Flux<Country> countries = client.get()
+				.uri("/all")
+				.accept(MediaType.APPLICATION_JSON)
+				.retrieve()
+				.bodyToFlux(Country.class); 
+		
+		/*List<Country> listCountries = Arrays.asList(restTemplate.getForObject(this.restCountry, Country[].class));
+		Flux<Country> countries = Flux.fromIterable(listCountries);*/
+	
+		timerLog(start);
+		
 		return countries.map(c -> new Country(c.getName(), c.getTranslations()));
-				//.delayElements(Duration.ofSeconds(1));
 	}
-
+	
+	private void timerLog (Instant start)
+	{
+		log.info("Tiempo transcurrido: " + Duration.between(start, Instant.now()).toMillis() + "ms");
+	}
 }

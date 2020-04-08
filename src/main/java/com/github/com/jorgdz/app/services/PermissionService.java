@@ -11,4 +11,7 @@ public interface PermissionService {
 	
 	Mono<Permission> findById(String id);
 	
+	Mono<Permission> findByName(String name);
+	
+	Mono<Permission> save(Permission permission);
 }

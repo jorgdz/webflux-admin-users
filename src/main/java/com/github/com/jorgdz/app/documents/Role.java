@@ -3,6 +3,8 @@ package com.github.com.jorgdz.app.documents;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,6 +21,7 @@ public class Role {
 	@Id
 	private String id;
 	
+	@NotEmpty(message = "El campo 'nombre del rol' es obligatorio.")
 	private String name;
 	
 	private String description;

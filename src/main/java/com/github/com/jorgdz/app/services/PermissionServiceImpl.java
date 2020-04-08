@@ -24,7 +24,18 @@ public class PermissionServiceImpl implements PermissionService{
 	@Override
 	public Mono<Permission> findById(String id) {
 		Mono<Permission> permission = permissionRepo.findById(id);
-		return (permission.blockOptional().isPresent()) ? permission : null;
+		return permission;
+	}
+
+	@Override
+	public Mono<Permission> save(Permission permission) {
+		return permissionRepo.save(permission);
+	}
+
+	@Override
+	public Mono<Permission> findByName(String name) {
+		Mono<Permission> permission = permissionRepo.findByName(name);
+		return permission;
 	}
 
 }
