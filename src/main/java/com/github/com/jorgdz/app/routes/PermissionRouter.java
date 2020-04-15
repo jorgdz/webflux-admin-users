@@ -29,8 +29,8 @@ public class PermissionRouter {
 		PermissionHandler permissionHandler = new PermissionHandler(requestHandler, servicePermission);
 		
 		return RouterFunctions
-				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/permissions")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::index)
-				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/permissions/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::show)
-				.andRoute(RequestPredicates.POST(AppHelper.PREFIX.concat("/permissions")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::store);
+				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/permissions")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::index)
+				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/permissions/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::show)
+				.andRoute(RequestPredicates.POST(AppHelper.PREFIX.concat("/handler/permissions")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), permissionHandler::store);
 	}
 }

@@ -25,7 +25,7 @@ public class UserRouter {
 		UserHandler userHandler = new UserHandler(serviceUser);
 		
 		return RouterFunctions
-				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/users")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), userHandler::index)
-				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/users/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), userHandler::show);
+				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/users")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), userHandler::index)
+				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/users/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), userHandler::show);
 	}
 }

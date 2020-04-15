@@ -25,8 +25,8 @@ public class RoleRouter {
 		RoleHandler roleHandler = new RoleHandler(serviceRole);
 		
 		return RouterFunctions
-				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/roles")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), roleHandler::index)
-				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/roles/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), roleHandler::show);
+				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/roles")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), roleHandler::index)
+				.andRoute(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/roles/{id}")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), roleHandler::show);
 	}
 	
 }

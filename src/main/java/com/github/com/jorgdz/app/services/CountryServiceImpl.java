@@ -2,15 +2,15 @@ package com.github.com.jorgdz.app.services;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
+/*import java.util.Arrays;
+import java.util.List;*/
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.github.com.jorgdz.app.models.Country;
@@ -44,7 +44,7 @@ public class CountryServiceImpl implements CountryService{
 	
 		timerLog(start);
 		
-		return countries.map(c -> new Country(c.getName(), c.getTranslations()));
+		return countries;
 	}
 	
 	private void timerLog (Instant start)

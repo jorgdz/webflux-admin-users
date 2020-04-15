@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Order(-2)
-public class Handler  extends AbstractErrorWebExceptionHandler {
+public class Handler extends AbstractErrorWebExceptionHandler {
 
 	public Handler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
 			ApplicationContext applicationContext, ServerCodecConfigurer config) {

@@ -1,6 +1,7 @@
 package com.github.com.jorgdz.app.documents;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +17,7 @@ public class Permission {
 	private String id;
 	
 	@NotEmpty(message = "El campo nombre es obligatorio.")
+	@Size(min = 3, max = 20, message = "El nombre debe ser mayor a 3 y menor a 20 caracteres.")
 	//@Indexed(unique=true)
 	private String name;
 	

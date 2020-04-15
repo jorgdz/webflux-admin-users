@@ -25,6 +25,6 @@ public class CountryRouter {
 		CountryHandler countryHandler = new CountryHandler(serviceCountry);
 		
 		return RouterFunctions
-				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/countries")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), countryHandler::index);
+				.route(RequestPredicates.GET(AppHelper.PREFIX.concat("/handler/countries")).and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), countryHandler::index);
 	}
 }
